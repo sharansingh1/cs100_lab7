@@ -1,10 +1,28 @@
-// Controller handler to handle functionality in room page
+// controllers/room.js
 
 const roomGenerator = require('../util/roomIdGenerator.js');
+const Chatroom = require('../models/Chatroom'); // Ensure this path is correct
 
-// Example for handle a get request at '/:roomName' endpoint.
-function getRoom(request, response){
-    response.render('room', {title: 'chatroom', roomName: request.params.roomName, newRoomId: roomGenerator.roomIdGenerator()});
+async function getRoom(request, response) {
+    const roomName = request.params.roomName;
+
+    try {
+        let room = await Chatroom.findOne({ name: roomName });
+
+        if (!room) {
+            const newRoomId = roomGenerator.roomIdGenerator();
+            room = new Chatroom({
+                name: roomName,
+                roomID: newRoomId
+            });
+            await room.save();
+        }
+
+        response.render('room', { title: 'Chatroom', roomName: room.name, newRoomId: room.roomID });
+    } catch (error) {
+        console.error('Database operation failed', error);
+        response.status(500).send('Internal Server Error');
+    }
 }
 
 module.exports = {
