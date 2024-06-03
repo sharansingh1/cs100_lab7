@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const nickname = document.getElementById('nickname').value;
             const text = document.getElementById('messageText').value;
-            const roomName = window.location.pathname.split('/')[1]; // Assuming URL is like /RoomName
+            const roomName = window.location.pathname.split('/')[1]; 
 
             fetch(`/${roomName}/messages`, {
                 method: 'POST',
@@ -46,13 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(message => {
                 console.log('Message sent', message);
-                fetchMessages();  // Fetch messages again to display the new one
+                fetchMessages();  
             })
             .catch(error => console.error('Error:', error));
         });
     }
 
-    // Only run fetchMessages if on a chatroom page
     if (window.location.pathname !== '/') {
         setInterval(fetchMessages, 3000);
     }
@@ -61,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
 const displayedMessages = new Set();
 
 function fetchMessages() {
-    const roomName = window.location.pathname.split('/')[1]; // Extract roomName from URL
-    if (!roomName) return; // If no room name, do not fetch messages
-    console.log('Fetching messages for room:', roomName); // Log roomName for debugging
+    const roomName = window.location.pathname.split('/')[1]; 
+    if (!roomName) return; 
+    console.log('Fetching messages for room:', roomName); 
     fetch(`/${roomName}/messages`)
     .then(response => {
         if (!response.ok) {
@@ -82,7 +81,7 @@ function fetchMessages() {
                 messagesContainer.appendChild(messageElement);
             }
         });
-        messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight; 
     })
     .catch(error => console.error('Error fetching messages:', error));
 }

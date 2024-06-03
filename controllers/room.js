@@ -1,7 +1,7 @@
 // controllers/room.js
 
 const roomGenerator = require('../util/roomIdGenerator.js');
-const Chatroom = require('../models/Chatroom'); // Ensure this path is correct
+const Chatroom = require('../models/Chatroom');
 
 async function getRoom(request, response) {
     const roomName = request.params.roomName;
@@ -20,8 +20,8 @@ async function getRoom(request, response) {
 
         response.render('room', { title: 'Chatroom', roomName: room.name, newRoomId: room.roomID });
     } catch (error) {
-        console.error('Database operation failed', error);
-        response.status(500).send('Internal Server Error');
+        console.error('failed to add to db', error);
+        response.status(500).send('server error');
     }
 }
 
