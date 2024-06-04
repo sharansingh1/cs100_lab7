@@ -1,19 +1,59 @@
-/* TODO: style each page */
 #messages {
-    height: 300px;
-    overflow-y: scroll;
-    border: 1px solid #ccc;
-    padding: 8px;
-    margin-bottom: 10px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 10px;
 }
 
 .message {
-    margin-bottom: 5px;
-    padding: 5px;
-    background-color: #f9f9f9;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #f9f9f9;
 }
 
 textarea {
-    width: 100%;
-    height: 50px;
+  width: 100%;
+  height: 50px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+#topBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+#topBar a {
+  margin: 15px;
+  background: rgb(162, 162, 162);
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  width: 10%;
+  text-align: center;
+}
+
+#roomList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.room {
+  margin: 15px;
+  background: rgb(211, 211, 211);
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  width: 25%;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.room:hover {
+  transform: scale(1.1);
 }

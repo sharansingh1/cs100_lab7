@@ -73,6 +73,15 @@ app.get('/:roomName/messages', async (req, res) => {
   }
 });
 
+app.get('/api/rooms', async (req, res) => {
+  try {
+      const rooms = await Chatroom.find();
+      res.json(rooms);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+});
+
 // NOTE: This is the sample server.js code we provided, feel free to change the structures
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(port, () => console.log(`Server listening on http://localhost:${port}`)))

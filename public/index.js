@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (window.location.pathname !== '/') {
         setInterval(fetchMessages, 3000);
+    } else {
+        fetchRooms();
     }
 });
 
@@ -84,4 +86,24 @@ function fetchMessages() {
         messagesContainer.scrollTop = messagesContainer.scrollHeight; 
     })
     .catch(error => console.error('Error fetching messages:', error));
+}
+
+function fetchRooms (){
+    fetch('/api/rooms')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(rooms => {
+        const roomsContainer = document.getElementById('roomList');
+        rooms.forEach(room => {
+            const roomElement = document.createElement('div');
+            roomElement.classList.add('room');
+            roomElement.innerHTML = `<a href="/${room.name}">${room.name}</a>`;
+            roomsContainer.appendChild(roomElement);
+        });
+    })
+    .catch(error => console.error('Error fetching rooms:', error));
 }
